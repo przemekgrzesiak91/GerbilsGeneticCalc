@@ -23,8 +23,7 @@ def genotypes_combinations(all_genes):
     # print(len(all_genotypes)) number of possible genotypes = 4096
 
     summary_genotypes = dict(Counter(all_genotypes))
-    print(summary_genotypes)
-    # print(''.join((('A', 'A'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('G', 'G'), ('P', 'P'))))
+    return summary_genotypes
 
 
 
@@ -36,7 +35,8 @@ def index():
         M_genotype = request.form.getlist('M_genotype[]')
 
         all_genes = genes_combinations(F_genotype, M_genotype)
-        genotypes_combinations(all_genes)
+        all_genotypes = genotypes_combinations(all_genes)
+        return render_template('app2.html', result = all_genotypes)
 
     return render_template('app.html')
 
