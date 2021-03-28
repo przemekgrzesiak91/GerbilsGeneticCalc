@@ -1,10 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,
+		shrink-to-fit=no">
+		<link rel="stylesheet" href="
+		https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<title></title>
+	</head>
+
+	<body>
+
+	<div class='container'>
+
+	<h1>
+		<img src="https://i.pinimg.com/originals/ba/e6/5c/bae65ca5a6a1e5bbe8b4e5e609aa493d.jpg" width=100">
+		Gerbil Genetic Calculator
+	</h1>
+
+
+	<hr>
+	<form method='post' action='/'>
+
+	<div class='form-group row'>
+	<h2>Father's genotype</h2>
+	</div>
+
+	<div class='form-group row' align="center">
+		<div class='col-sm-6'>
+				<!-- Father's Gene A -->
+				<select name="F_genotype[]">
+				  <option value="A">A</option>
+				  <option value="a">a</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="A">A</option>
+				  <option value="a">a</option>
+				</select>
+
+				<!-- Father's Gene C -->
+				<select name="F_genotype[]">
+				  <option value="C">C</option>
+				  <option value="cb">cb</option>
+				  <option value="ch">ch</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="C">C</option>
+				  <option value="cb">cb</option>
+				  <option value="ch">ch</option>
+				</select>
+
+				<!-- Father's Gene D -->
+				<select name="F_genotype[]">
+				  <option value="D">D</option>
+				  <option value="d">d</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="D">D</option>
+				  <option value="d">d</option>
+				</select>
+
+				<!-- Father's Gene E -->
+				<select name="F_genotype[]">
+				  <option value="E">E</option>
+				  <option value="e">e</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="E">E</option>
+				  <option value="e">e</option>
+				</select>
+
+				<!-- Father's Gene G -->
+				<select name="F_genotype[]">
+				  <option value="G">G</option>
+				  <option value="g">g</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="G">G</option>
+				  <option value="g">g</option>
+				</select>
+
+
+				<!-- Father's Gene P -->
+				<select name="F_genotype[]">
+				  <option value="P">P</option>
+				  <option value="p">p</option>
+				</select>
+				<select name="F_genotype[]">
+				  <option value="P">P</option>
+				  <option value="p">p</option>
+				</select>
+		</div>
+	</div>
+
+		<div class='form-group row'>
+	<h2>Mother's genotype</h2>
+	</div>
+
+	<div class='form-group row' align="center">
+		<div class='col-sm-6'>
+				<!-- Mother's Gene A -->
+				<select name="M_genotype[]">
+				  <option value="A">A</option>
+				  <option value="a">a</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="A">A</option>
+				  <option value="a">a</option>
+				</select>
+
+				<!-- Mother's Gene C -->
+				<select name="M_genotype[]">
+				  <option value="C">C</option>
+				  <option value="cb">cb</option>
+				  <option value="ch">ch</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="C">C</option>
+				  <option value="cb">cb</option>
+				  <option value="ch">ch</option>
+				</select>
+
+				<!-- Mother's Gene D -->
+				<select name="M_genotype[]">
+				  <option value="D">D</option>
+				  <option value="d">d</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="D">D</option>
+				  <option value="d">d</option>
+				</select>
+
+				<!-- Mother's Gene E -->
+				<select name="M_genotype[]">
+				  <option value="E">E</option>
+				  <option value="e">e</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="E">E</option>
+				  <option value="e">e</option>
+				</select>
+
+				<!-- Mother's Gene G -->
+				<select name="M_genotype[]">
+				  <option value="G">G</option>
+				  <option value="g">g</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="G">G</option>
+				  <option value="g">g</option>
+				</select>
+
+
+				<!-- Mother's Gene P -->
+				<select name="M_genotype[]">
+				  <option value="P">P</option>
+				  <option value="p">p</option>
+				</select>
+				<select name="M_genotype[]">
+				  <option value="P">P</option>
+				  <option value="p">p</option>
+				</select>
+		</div>
+	</div>
+
+
+	<div class='form-group row' align="center">
+		<div class='col-sm-6'>
+			<button type='submit' class='btn btn-primary'>Calculate offsprings gentoypes
+			</button>
+		</div>
+	</div>
+
+    <div class='form-group row'>
+        <div class="col-sm-6">
+            <!-- WYNIK -->
+			<p> Possible genotypes and phenotypes:</p>
+            <br />
+			{{ result|safe }}
+        </div>
+    </div>
+
+
+
+	</div>
+
+	</body>
+
 </html>
