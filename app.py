@@ -97,8 +97,8 @@ def possible_phenotypes(all_genotypes):
                 else:
                     result[key_p] = value
                 break
-            if n == 0:
-                print("unfind: ", key, value)
+            #if n == 0:
+            #    print("unfind: ", key, value)
 
 
     return result
