@@ -22,7 +22,6 @@ def genotypes_combinations(all_genes):
     all_genotypes = list(itertools.product(*all_genes))
 
     # print(len(all_genotypes)) number of possible genotypes = 4096
-
     summary_genotypes = dict(Counter(all_genotypes))
     genotypes = dict()
 
@@ -36,46 +35,73 @@ def genotypes_combinations(all_genes):
 
     return genotypes
 
-phenotypes = {'Golden Agouti': r'A.C.D.E.G.P.',
-                'Grey Agouti': r'A.C.D.E.ggP.',
+phenotypes = {'Golden Agouti': r'A.C.+D.E.G.P.',
+                'Light Grey Agouti': r'A.CcbD.E.ggP.',
+                'Apricot': r'A.C.+D.eeggpp',
+                'Polar fox': r'A.C.+D.eeggP.',
+                'Grey Agouti': r'A.+D.E.ggP.',
                 'Argente Golden': r'A.CCD.E.G.pp',
-                'Argente Cream': r'A.CchD.E.G.pp',
-                'Cream (Ivory cream)': r'A.C.D.E.ggpp',
-                'Dark Eyed Honey': r'A.C.D.eeG.P.',
-                'Yellow Fox (Red Eyed Honey)': r'A.C.D.eeG.pp',
-                'Nutmeg': r'aaC.D.eeG.P.',
-                'Silver Nutmeg': r'aaC.D.eeggP.',
-                'Saffron (Red Fox - Argente Nutmeg)': r'aaC.D.eeG.pp',
-                'Black': r'aaC.D.E.G.P.',
-                'Pearl (Colourpoint Agouti)': r'A.cbc.D.E.G.P.',
-                'Slate': r'aaC.D.E.ggP.',
+                'Argente Cream': r'A.Cc.D.E.G.pp',
+                'Cream (Ivory cream)': r'A.C.+D.E.ggpp',
+                'Dark Eyed Honey': r'A.C.+D.eeG.P.',
+                'Yellow Fox (Red Eyed Honey)': r'A.C.+D.eeG.pp',
+                'Nutmeg': r'aaC.+D.eeG.P.',
+                'Silver Nutmeg': r'aa.+D.eegg.+',
+                'Saffron (Red Fox - Argente Nutmeg)': r'aaC.+D.eeG.pp',
+                'Black': r'aaC.+D.E.G.P.',
+                'Pearl (Colourpoint Agouti)': r'A.cbc.+D.E.G.P.',
+                'Slate': r'aaC.+D.E.ggP.',
                 'Lilac': r'aaCCD.E.G.pp',
                 'Dove': r'aaCchD.E.G.pp',
-                'Ruby Eyed White (REW)*': r'aaC.D.E.ggpp',
+                'Ruby Eyed White (REW)*': r'aaC.+D.E.ggpp',
                 'Burmese': r'aacbcbD.E.G.P.',
                 'Siamese': r'aacbchD.E.G.P.',
-                'Pink Eyed White (PEW)*': r'..chchD.E...pp',
+                'Pink Eyed White (PEW)*': r'.+D.E...pp',
                 'Dark Tailed White/Himalayan (DTW)*': r'..chchD.E...P.',
-                'Black Eyed White*': r'..cbchD.eeggP.'}
+                'Black Eyed White*': r'..cbchD.eeggP.',
+                'Dilute Golden Agouti': r'A.C.+ddE.G.P.',
+                'Dilute Polar fox': r'A.+ddeeggP.',
+                'Dilute Grey Agouti': r'A.+ddE.ggP.',
+                'Dilute Apricot': r'A.C.+ddeeggpp',
+                'Dilute Argente Golden': r'A.CCddE.G.pp',
+                'Dilute Argente Cream': r'A.Cc.ddE.G.pp',
+                'Dilute Cream (Ivory cream)': r'A.C.+ddE.ggpp',
+                'Dilute Dark Eyed Honey': r'A.C.+ddeeG.P.',
+                'Dilute Yellow Fox (Red Eyed Honey)': r'A.C.+ddeeG.pp',
+                'Dilute Nutmeg': r'aaC.+dd....P.',
+                'Dilute Silver Nutmeg': r'aa.+ddeegg.+',
+                'Dilute Saffron (Red Fox - Argente Nutmeg)': r'aaC.+ddeeG.pp',
+                'Dilute Black': r'aaC.+ddE.G.P.',
+                'Dilute Pearl (Colourpoint Agouti)': r'A.cbc.+ddE.G.P.',
+                'Dilute Slate': r'aaC.+ddE.ggP.',
+                'Dilute Lilac': r'aaCCddE.G.pp',
+                'Dilute Dove': r'aaCchddE.G.pp',
+                'Dilute Ruby Eyed White (REW)*': r'aaC.+ddE.ggpp',
+                'Dilute Burmese': r'aacbcbddE.G.P.',
+                'Dilute Siamese': r'aacbchddE.G.P.',
+                'Dilute Pink Eyed White (PEW)*': r'..c.c.dd....pp',
+                'Dilute Dark Tailed White/Himalayan (DTW)*': r'..chchddE...P.',
+                'Dilute Black Eyed White*': r'..cbchddeeggP.',
+                'CP Agouti': r'.+c.+',}
 
 def possible_phenotypes(all_genotypes):
     result = dict()
     print(all_genotypes)
     for key, value in all_genotypes.items():
+        n = len(phenotypes)
         for key_p, value_p in phenotypes.items():
-            #print(value_p, key)
+            n -= 1
             if re.match(value_p,key):
                 if key_p in result.keys():
                     result[key_p] += value
                 else:
                     result[key_p] = value
+                break
+            if n == 0:
+                print("unfind: ", key, value)
+
 
     return result
-
-
-
-
-
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -90,7 +116,11 @@ def index():
 
         df = pd.DataFrame.from_dict(result, orient='index',columns=["Quantity"])
         df["%"] = df["Quantity"] / 4096 * 100
+        df = df.round({"%":2})
+        df = df.sort_values("Quantity", ascending=False)
         dfhtml = df.to_html()
+
+        print(sum(df["Quantity"]))
 
         return render_template('app2.html', result = dfhtml)
 
